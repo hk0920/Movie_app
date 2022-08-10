@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Component1 from "./Component1";
 import Component2 from "./Component2";
 import Component3 from "./Component3";
+import Component4 from "./Component4";
 
 const Title = styled.h3`
   margin-bottom: 10px;
@@ -25,6 +26,10 @@ function Study() {
       <Box>
         <Title>3. styled-components 이용 - animation 만들기, nesting 이용하여컴포넌트 안 자식 선택</Title>
         <Component3 />
+      </Box>
+      <Box>
+        <Title>4. styled-components - themes 이용 - dark모드 만들기 1/2</Title>
+        <Component4 />
       </Box>
     </div>
   );
