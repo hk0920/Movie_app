@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Circle from "./Circle";
 
 // Type Script - Java Script를 기반으로 한 언어  + 새로운 기능 (문법이 Java Script와 동일)
 //             - 다만 Type Script는 strongly-type 언어라 프로그래망 언어가 작동하기 전 type을 확인한다.
@@ -11,26 +12,23 @@ import styled from "styled-components";
 
 // TypeScript는 styled-components 설치 전엔 모르기 때문에 npm 으로 설치해준다.
 // 명령어 : npm i --save-dev @types/styled-components
+//         npm install --save styled-components
 
 // theme - 기본적으로 모든 색상들을 가지고 있는 object
 const Wrapper = styled.div`
-    display:inline-block;
-    width:200px;
-    height:200px;
-    padding:50px 0;
-    text-align:center;
-    box-sizing:border-box;
-    background-color:${props => props.theme.backgroundColor};
+    margin-bottom:50px;
 `;
 
-const Title = styled.h1`
+const Title = styled.h3`
     color: ${(props) => props.theme.textColor};
 `;
 
 function Component1(){
     return (
         <Wrapper>
-            <Title>Hello</Title>
+            <Title>1. interface 이용하여 props 전달</Title>
+            <Circle bgColor="teal" />
+            <Circle bgColor="tomato" borderColor="pink"/>
         </Wrapper>
     )
 }
