@@ -15,9 +15,7 @@ const Container = styled.div<CircleProps>`
     margin:0 10px;
     border-radius:50%;
     background:${props => props.bgColor};
-    border-weight:5px;
-    border-style:solid;
-    border-color:${props => props.borderColor};
+    border:5px solid ${props => props.borderColor};
 `;
 
 // bgColor를 interface를 안해주면 bgColor가 뭔지 모르기 때문에 에러난다.
@@ -29,6 +27,7 @@ const Container = styled.div<CircleProps>`
 interface CircleProps {
     bgColor : string;        // default props : ':'
     borderColor ?: string;   // 옵션 props만들기 : '?:' 를 넣어주면 props의 값이 선택적이다.
+    text ?: string;
 }
 
 // interface는 함수명 (props : interface){} 로 사용
@@ -38,8 +37,12 @@ interface CircleProps {
 //                              props는 코드 실행 "후" 브라우저에 에러 
 
 function Circle(props : CircleProps) {
+        // == ({bgColor, borderColor , text = "default"} : CircleProps)
     return (
-        <Container bgColor={props.bgColor} borderColor={props.borderColor} />
+                                                    //  props.borderColor != undefined ? props.borderColor : props.bgColor 위 코드와 동일 기능
+        <Container bgColor={props.bgColor} borderColor={props.borderColor ?? props.bgColor}>
+            {props.text}
+        </Container>
     )
 }
 

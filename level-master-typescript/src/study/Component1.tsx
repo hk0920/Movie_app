@@ -28,7 +28,7 @@ function Component1(){
         <Wrapper>
             <Title>1. interface 이용하여 props 전달</Title>
             <Circle bgColor="teal" />
-            <Circle bgColor="tomato" borderColor="pink"/>
+            <Circle bgColor="tomato" borderColor="pink" text="i'm option."/>
         </Wrapper>
     )
 }
