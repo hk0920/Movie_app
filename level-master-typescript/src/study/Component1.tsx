@@ -15,6 +15,7 @@ import Circle from "./Circle";
 //         npm install --save styled-components
 
 // theme - 기본적으로 모든 색상들을 가지고 있는 object
+
 const Wrapper = styled.div`
     margin-bottom:50px;
 `;
