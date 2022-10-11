@@ -27,7 +27,7 @@ function Counter() {
     
     return (
         <Container>
-            {counter}
+            {counter} || {value}
         </Container>
     )
 }

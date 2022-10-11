@@ -12,6 +12,9 @@ function Forms(){
         const {
             currentTarget : {value}
         } = event;
+        // 동일한 표현으로는 아래와 같다.(위 표현은 변수가 여러 개일 경우 사용하면 장점인 문법)
+        // == 동일한 표현 1.  const value = event.currentTarget.value; 
+        // == 동일한 표현 2.  const {value} = event.currentTarget;
 
         setValue(value);    // input type 이 text이기 때문에 string 으로 받는다.
     }
