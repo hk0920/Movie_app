@@ -24,16 +24,25 @@ function Forms(){
         console.log("hello", value);
     }
 
+    // button이 form 안에 없을 경우 event 는 MouseEvent 로 주면 된다.
+    // React.js 의 이벤트 api 정보는 https://reactjs-org-ko.netlify.app/docs/events.html 여기에서 확인 가능하다.
+    const onClick = (event:React.MouseEvent<HTMLButtonElement>) => {
+        console.log("click")
+    }
+
     return(
-        <form onSubmit={onSubmit}>
-            <input 
-                value={value}
-                onChange={onChange} 
-                type="text" 
-                placeholder="username" 
-            />
-            <button>Login</button>
-        </form>
+        <div>
+            <form onSubmit={onSubmit}>
+                <input 
+                    value={value}
+                    onChange={onChange} 
+                    type="text" 
+                    placeholder="username" 
+                />
+                <button>Login</button>
+            </form>
+            <button onClick={onClick}>Click</button>
+        </div>
     )
 }
 
