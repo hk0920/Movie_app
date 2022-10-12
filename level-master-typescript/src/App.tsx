@@ -1,13 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import StudyComponent from './study/Study';
+import Router from './Router';
 
 function App() {
-  return (
-    <div className="App">
-      <StudyComponent />
-    </div>
-  );
+  return <Router/>
 }
 
 export default App;
