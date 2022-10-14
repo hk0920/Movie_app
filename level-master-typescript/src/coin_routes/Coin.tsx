@@ -1,10 +1,15 @@
 import { useParams } from 'react-router';
+import styled from 'styled-components';
 
 // react V6 이전
 // -> interface 를 만들어준 후 userParams 의 type을 typescript이용해 선언해준다.
 // interface RouteParams {
 //     coinId: string;
 // }
+
+const Title = styled.h1`
+    color:${props=>props.theme.accentColor};
+`;
 
 function Coin(){
     // react V6 이전
@@ -19,7 +24,7 @@ function Coin(){
     //                                                                   unknown as Item;           => 무엇이든 할당할 수 있다.      => console.log(결과) : Item , Item | data   
     const {coinId} = useParams<"coinId">(); // == const { coinId } = useParams< { coinId:string } >();
     console.log(coinId)
-    return <h1>Coin : {coinId}</h1>
+    return <Title>Coin : {coinId}</Title>
 }
 
 export default Coin;

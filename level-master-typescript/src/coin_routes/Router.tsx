@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
-import Coin from "./coin_routes/Coin";
-import Coins from "./coin_routes/Coins";
-import StudyComponent from "./study/Study";
+import Coin from "./Coin";
+import Coins from "./Coins";
+import StudyComponent from "../study/Study";
 
 function Router(){
     return (

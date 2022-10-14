@@ -17,7 +17,7 @@ const Button = styled.button`
     display:inline-block;
     padding:5px 10px;
     color:${(props) => props.theme.textColor};
-    background:${(props)=>props.theme.btnColor};
+    background:${(props)=>props.theme.accentColor};
 `;
 
 function ThemeComponent(){

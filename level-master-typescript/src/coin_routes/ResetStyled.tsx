@@ -1,7 +1,9 @@
 import { createGlobalStyle } from "styled-components";
-import Router from "../Router";
+import Router from "./Router";
 
 const GlobalStyle = createGlobalStyle`
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+    
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
     a, abbr, acronym, address, big, cite, code,
@@ -28,11 +30,17 @@ const GlobalStyle = createGlobalStyle`
         display: block;
     }
     /* HTML5 hidden-attribute fix for newer browsers */
+    * {
+        box-sizing:border-box;
+    }
     *[hidden] {
         display: none;
     }
     body {
+        font-family:'Noto Sans KR', sans-serif;
         line-height: 1;
+        color:${(props) => props.theme.textColor};
+        background-color:${(props) => props.theme.bgColor};
     }
     menu, ol, ul {
         list-style: none;
@@ -49,6 +57,10 @@ const GlobalStyle = createGlobalStyle`
         border-collapse: collapse;
         border-spacing: 0;
     }
+    a {
+        color:inherit;
+        text-decoration:none;
+    }
 `;
 
 function ResetStyled(){
@@ -57,7 +69,8 @@ function ResetStyled(){
         // <></>  : Flagment 로 여러 컴포넌트를 묶어 반환하는 react 문법 (유령 컴포넌트)
         //          부모없이 서로 붙어 있는 많은 컴포넌트들을 리턴할 수 있게 해준다.
         <>  
-            <GlobalStyle/>
+            {/* resetStyle을 router와 같이 담으면 html 안의 style이 같이 들어간다. */}
+            <GlobalStyle/>  
             <Router/>
         </>
     )

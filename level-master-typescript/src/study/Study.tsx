@@ -24,6 +24,7 @@ const Box = styled.div`
 `;
 
 const Title = styled.h3`
+    margin-bottom:20px;
     color: ${(props) => props.theme.textColor};
 `;
 
