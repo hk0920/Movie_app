@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -18,9 +19,7 @@ const Title = styled.h1`
     color:${(props) => props.theme.accentColor};    
 `;
 
-const CoinList = styled.ul`
-
-`;
+const CoinList = styled.ul``;
 
 const Coin = styled.li`
     margin-bottom:15px;
@@ -45,21 +44,55 @@ const Coin = styled.li`
     }
 `;
 
-const coins = [
-    { "id": "btc-bitcoin", "name": "Bitcoin", "symbol": "BTC", "rank": 1, "is_new": false, "is_active": true, "type": "coin" },
-    { "id": "eth-ethereum", "name": "Ethereum", "symbol": "ETH", "rank": 2, "is_new": false, "is_active": true, "type": "coin" },
-    { "id": "usdt-tether", "name": "Tether", "symbol": "USDT", "rank": 3, "is_new": false, "is_active": true, "type": "token" }
-]
+const Loader = styled.p`
+    font-size:30px;
+    font-weight:bold;
+    text-align:center;
+`;
 
+// 가상 코인 배열
+// const coins = [
+//     { "id": "btc-bitcoin", "name": "Bitcoin", "symbol": "BTC", "rank": 1, "is_new": false, "is_active": true, "type": "coin" },
+//     { "id": "eth-ethereum", "name": "Ethereum", "symbol": "ETH", "rank": 2, "is_new": false, "is_active": true, "type": "coin" },
+//     { "id": "usdt-tether", "name": "Tether", "symbol": "USDT", "rank": 3, "is_new": false, "is_active": true, "type": "token" }
+// ]
+
+// 1. interface 로 값의 type 지정하기
+interface CoinInterface {
+    id : string;
+    name : string;
+    symbol : string;
+    rank : number;
+    is_new : boolean;
+    is_active : boolean;
+    type : string;
+}
 
 function Coins(){
+    // 배열로 받기 떄문에 interface도 배열로 선언[] / useState값이 빈 배열로 선언 []
+    const [coins, setCoins] = useState<CoinInterface[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    // useEffect 로 component life의 시작점에서만 시작하도록 하고 싶을 경우 (처음으로 시작될 때 ★ 1번만!)
+    // 2. api 가져오기
+    useEffect(()=>{
+        (async() =>{
+            const response = await fetch("https://api.coinpaprika.com/v1/coins");
+            const json = await response.json();
+            // console.log(json);
+            setCoins(json.slice(0, 100));
+            setLoading(false);
+        })();
+    }, []);
+
     return (
         <Container>
             <Header>
                 <Title>코인</Title>
             </Header>
             <CoinList>
-                {coins.map(coin => (
+                {loading ? <Loader>Loading...</Loader> : 
+                coins.map(coin => (
                     <Coin key={coin.id}>
                         {/* 
                             a태그는 새로고침이 되므로 Link 태그로 사용한다.
@@ -69,7 +102,8 @@ function Coins(){
                             {coin.name} &rarr;
                         </Link>
                     </Coin>
-                ))}
+                ))
+                }
             </CoinList>
         </Container>
     )
