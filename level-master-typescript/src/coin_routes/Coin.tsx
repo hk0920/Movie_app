@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 // react V6 이전
@@ -8,8 +10,33 @@ import styled from 'styled-components';
 // }
 
 const Title = styled.h1`
+    margin-bottom:20px;
+    font-size:35px;
+    font-weight:bold;
     color:${props=>props.theme.accentColor};
 `;
+
+const Container = styled.div`
+    max-width:320px;
+    margin:40px auto;
+    padding:0 20px;
+`;
+
+const Header = styled.header`
+    text-align:center;
+`;
+const Loader = styled.p`
+    font-size:30px;
+    font-weight:bold;
+    text-align:center;
+`;
+
+interface RouteParams {
+    coinId : string;
+}
+interface RouteState {
+    name : string;
+}
 
 function Coin(){
     // react V6 이전
@@ -23,8 +50,32 @@ function Coin(){
     //                                                                   data as Item;              => data에 Item을 할당할 수 있다. => console.log(결과) : Item , Item | data
     //                                                                   unknown as Item;           => 무엇이든 할당할 수 있다.      => console.log(결과) : Item , Item | data   
     const {coinId} = useParams<"coinId">(); // == const { coinId } = useParams< { coinId:string } >();
-    console.log(coinId)
-    return <Title>Coin : {coinId}</Title>
+    // console.log(coinId)
+    const [loading, setLoading] = useState(true);
+    const location  = useLocation();
+    const state = location.state as RouteState;     // interface 활용 방법
+    // console.log(state.name)
+
+    useEffect(()=>{
+        (async() =>{
+            // const response = await fetch(`https://api.coinpaprika.com/v1/${coinId}`);
+            // const json = await response.json();
+
+            //  위 코드를 캡슐화한 문법
+            const response = await(await fetch(`https://api.coinpaprika.com/v1/${coinId}`)).json();
+            console.log(response)
+        })();
+    }, []);
+
+    return (
+        <Container>
+            <Header>
+                {/* 시크릿 창에서 상세 페이지 url을 열면 state값을 못 받아와 에러나기 때문에 에러 방지 loading을 넣어준다. */}
+                <Title>{state?.name || "Loading..."}</Title>    
+            </Header>
+            {loading ? <Loader>Loading...</Loader> : null}
+        </Container>
+    )
 }
 
 export default Coin;

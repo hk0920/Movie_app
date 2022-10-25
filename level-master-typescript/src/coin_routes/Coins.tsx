@@ -29,11 +29,13 @@ const Coin = styled.li`
     overflow:hidden;
 
     a {
-        display:block;
+        display:flex;
         width:100%;
         height:100%;
         padding:15px 20px;
+        line-height:20px;
         transition:color 0.2s ease-in;
+        align-items:center;
     }
 
     &:hover {
@@ -48,6 +50,12 @@ const Loader = styled.p`
     font-size:30px;
     font-weight:bold;
     text-align:center;
+`;
+
+const Img = styled.img`
+    width:30px;
+    margin-right:10px;
+    vertical-align:top;
 `;
 
 // 가상 코인 배열
@@ -77,7 +85,12 @@ function Coins(){
     // 2. api 가져오기
     useEffect(()=>{
         (async() =>{
-            const response = await fetch("https://api.coinpaprika.com/v1/coins");
+            const response = await fetch("https://api.coinpaprika.com/v1/coins", {
+                method:"POST",
+                headers: new Headers({
+                    'content-type': 'application/json'
+                }),
+            });
             const json = await response.json();
             // console.log(json);
             setCoins(json.slice(0, 100));
@@ -98,7 +111,12 @@ function Coins(){
                             a태그는 새로고침이 되므로 Link 태그로 사용한다.
                             Link to = {이동하고 싶은 url} 
                         */}
-                        <Link to={"/" + coin.id}>
+                        {/* v6에서 Link 안의 state 값 문법 비교 
+                            - 기존 문법 : <Link to={{ pathname:`/${coin.id}`, state: {name:coin.name} }}
+                            - v6 문법 : <Link to={{pathname: `/${coin.id}`}} state={{name : coin.name}} >
+                        */}
+                        <Link to={{ pathname: `/${coin.id}` }} state={{name : coin.name}} >
+                            <Img src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} alt="" />
                             {coin.name} &rarr;
                         </Link>
                     </Coin>
