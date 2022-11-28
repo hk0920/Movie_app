@@ -58,11 +58,11 @@ function Coin(){
 
     useEffect(()=>{
         (async() =>{
-            // const response = await fetch(`https://api.coinpaprika.com/v1/${coinId}`);
+            // const response = await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`);
             // const json = await response.json();
 
             //  위 코드를 캡슐화한 문법
-            const response = await(await fetch(`https://api.coinpaprika.com/v1/${coinId}`)).json();
+            const response = await(await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
             console.log(response)
         })();
     }, []);

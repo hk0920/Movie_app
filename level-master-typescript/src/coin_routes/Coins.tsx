@@ -85,14 +85,9 @@ function Coins(){
     // 2. api 가져오기
     useEffect(()=>{
         (async() =>{
-            const response = await fetch("https://api.coinpaprika.com/v1/coins", {
-                method:"POST",
-                headers: new Headers({
-                    'content-type': 'application/json'
-                }),
-            });
+            const response = await fetch("https://api.coinpaprika.com/v1/coins");
             const json = await response.json();
-            // console.log(json);
+            console.log(json);
             setCoins(json.slice(0, 100));
             setLoading(false);
         })();
